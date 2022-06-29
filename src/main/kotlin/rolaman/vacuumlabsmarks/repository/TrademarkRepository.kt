@@ -51,4 +51,3 @@ class TrademarkRepository(
 
     override val index: String = "trademark"
 }
-
