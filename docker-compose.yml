@@ -11,26 +11,16 @@ services:
       - ./:/home/gradle/app
       - ~/.gradle:/home/gradle/.gradle
     command: gradle clean ${GRADLE_COMMAND}
-  mongo:
-    container_name: mongo
-    image: mongo:4.2.21
-    ports:
-      - "27017:27017"
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: trademarks-app
-      MONGO_INITDB_ROOT_PASSWORD: trademarks-app
-      MONGO_INITDB_DATABASE: trademarks
-    volumes:
-      - trademarksmongodata:/data/db
   elastic:
     container_name: elastic
-    image: elasticsearch
+    image: elasticsearch:8.2.3
     ports:
       - "9200:9200"
     environment:
       - discovery.type=single-node
+      - xpack.security.enabled=false
     volumes:
-      - trademarkselasticdataa:/usr/share/elasticsearch/data
+      - trademarkselasticdata:/usr/share/elasticsearch/data
   nginx:
     container_name: nginx
     hostname: nginx
@@ -39,7 +29,5 @@ services:
       - "80:80"
 
 volumes:
-  trademarksmongodata:
-    external: true
   trademarkselasticdata:
     external: true

@@ -26,16 +26,14 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("org.springframework.boot:spring-boot-starter-data-mongodb:2.7.1")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
-    implementation("org.mongodb:mongodb-driver-sync:4.6.1")
+    implementation("co.elastic.clients:elasticsearch-java:8.3.0")
+    implementation("jakarta.json:jakarta.json-api:2.1.0")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.3")
     implementation("io.github.microutils:kotlin-logging:2.1.23")
-
-
 }
 
 tasks.withType<KotlinCompile> {

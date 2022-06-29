@@ -1,5 +1,6 @@
 package rolaman.vacuumlabsmarks.config
 
+import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.json.JsonMapper
 import com.fasterxml.jackson.dataformat.xml.XmlMapper
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
@@ -22,6 +23,7 @@ class MapperConfig {
     fun jsonMapper(): JsonMapper {
         val mapper = JsonMapper()
         mapper.registerKotlinModule()
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
         return mapper
     }
 }
