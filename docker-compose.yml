@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  app:
+    container_name: app
+    image: gradle:jdk11-openj9
+    ports:
+      - "8080:8080"
+    working_dir: /home/gradle/app
+    volumes:
+      - ./:/home/gradle/app
+      - ~/.gradle:/home/gradle/.gradle
+    command: gradle clean ${GRADLE_COMMAND}
+  mongo:
+    container_name: mongo
+    image: mongo:4.2.21
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: trademarks-app
+      MONGO_INITDB_ROOT_PASSWORD: trademarks-app
+      MONGO_INITDB_DATABASE: trademarks
+    volumes:
+      - trademarksmongodata:/data/db
+  elastic:
+    container_name: elastic
+    image: elasticsearch
+    ports:
+      - "9200:9200"
+    environment:
+      - discovery.type=single-node
+    volumes:
+      - trademarkselasticdataa:/usr/share/elasticsearch/data
+  nginx:
+    container_name: nginx
+    hostname: nginx
+    image: nginx:1.23.0
+    ports:
+      - "80:80"
+
+volumes:
+  trademarksmongodata:
+    external: true
+  trademarkselasticdata:
+    external: true
