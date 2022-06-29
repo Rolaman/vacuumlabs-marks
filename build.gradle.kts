@@ -29,6 +29,7 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.testcontainers:elasticsearch:1.17.3")
 
     implementation("co.elastic.clients:elasticsearch-java:8.3.0")
     implementation("jakarta.json:jakarta.json-api:2.1.0")

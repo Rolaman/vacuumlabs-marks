@@ -1,10 +1,3 @@
-spring:
-  data:
-    mongodb:
-      authentication-database: admin
-      username: trademarks-app
-      password: trademarks-app
-      database: trademarks
 server:
   error:
     include-stacktrace: never

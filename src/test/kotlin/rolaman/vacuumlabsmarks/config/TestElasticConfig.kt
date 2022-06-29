@@ -7,28 +7,34 @@ import co.elastic.clients.transport.rest_client.RestClientTransport
 import com.fasterxml.jackson.databind.json.JsonMapper
 import org.apache.http.HttpHost
 import org.elasticsearch.client.RestClient
-import org.springframework.beans.factory.annotation.Value
+import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Configuration
-import org.springframework.context.annotation.Profile
+import org.testcontainers.elasticsearch.ElasticsearchContainer
+import javax.annotation.PreDestroy
 
-@Profile("!test")
-@Configuration
-class ElasticConfig(
+@TestConfiguration
+class TestElasticConfig(
     private val jsonMapper: JsonMapper,
 ) {
 
-    @Value("\${elastic.host:localhost}")
-    lateinit var elasticHost: String
+    lateinit var container: ElasticsearchContainer
 
     @Bean
     fun elasticsearchClient(): ElasticsearchClient {
+        container = ElasticsearchContainer("docker.elastic.co/elasticsearch/elasticsearch:8.2.3")
+        container.addExposedPort(9200)
+        container.start()
         val restClient: RestClient = RestClient.builder(
-            HttpHost(elasticHost, 9200)
+            HttpHost.create("localhost:9200")
         ).build()
         val transport: ElasticsearchTransport = RestClientTransport(
             restClient, JacksonJsonpMapper(jsonMapper)
         )
         return ElasticsearchClient(transport)
+    }
+
+    @PreDestroy
+    fun destroy() {
+        container.stop()
     }
 }
