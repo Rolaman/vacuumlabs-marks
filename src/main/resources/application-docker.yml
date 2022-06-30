@@ -1,0 +1,5 @@
+elastic:
+  host: elastic
+spring:
+  devtools:
+    add-properties: false
