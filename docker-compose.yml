@@ -21,6 +21,7 @@ services:
     environment:
       - discovery.type=single-node
       - xpack.security.enabled=false
+      - ES_JAVA_OPTS="-Xms300m -Xmx300m"
     volumes:
       - trademarkselasticdata:/usr/share/elasticsearch/data
   nginx:
