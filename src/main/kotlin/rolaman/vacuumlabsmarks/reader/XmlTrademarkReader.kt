@@ -66,7 +66,11 @@ class XmlTrademarkReader(
                     xmlId = xmlId,
                 )
             }
-            else -> throw Exception("Unknown trademark type $type")
+            else -> {
+                XmlOtherTrademarkItem(
+                    xmlId = xmlId
+                )
+            }
         }
     }
 }

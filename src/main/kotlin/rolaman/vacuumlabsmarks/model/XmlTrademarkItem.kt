@@ -40,3 +40,7 @@ data class XmlPatternTrademarkItem(
 data class XmlSoundTrademarkItem(
     override val xmlId: String,
 ) : XmlTrademarkItem
+
+data class XmlOtherTrademarkItem(
+    override val xmlId: String,
+) : XmlTrademarkItem
