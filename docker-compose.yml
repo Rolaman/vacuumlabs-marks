@@ -10,7 +10,7 @@ services:
     volumes:
       - ./:/home/gradle/app
       - ~/.gradle:/home/gradle/.gradle
-    command: gradle bootRun --args='--spring.profiles.active=docker'
+    command: gradle bootRun --args='--spring.profiles.active=docker,populating'
     depends_on:
       - elastic
   elastic:
